@@ -1,0 +1,16 @@
+---
+- git: dest={{ rbenv_root }} repo=https://github.com/sstephenson/rbenv depth=1
+- git: dest={{ rbenv_root }}/plugins/ruby-build repo=https://github.com/sstephenson/ruby-build depth=1
+- template: src=rbenv.sh.j2 dest=/etc/profile.d/rbenv.sh owner=root group=root mode=0644
+- name: rbenv install {{ rbenv_ruby_version }}
+  shell: |
+   creates={{ rbenv_root }}/versions/{{ rbenv_ruby_version }}
+   set -e
+   . /etc/profile.d/rbenv.sh
+   export CONFIGURE_OPTS="--disable-install-doc"
+   rbenv install {{ rbenv_ruby_version }}
+   rbenv global {{ rbenv_ruby_version }}
+- file: state=directory path={{ rbenv_root }}/versions/{{ rbenv_ruby_version }}/etc owner=root group=root mode=0755
+- copy: src=gemrc dest={{ rbenv_root }}/versions/{{ rbenv_ruby_version }}/etc/gemrc owner=root group=root mode=0644
+- gem: name=rbenv-rehash user_install=no executable={{ rbenv_root }}/shims/gem
+- gem: name=bundler user_install=no executable={{ rbenv_root }}/shims/gem

@@ -1,2 +1,4 @@
 ---
 # tasks file for ansible-role-rbenv
+- include: packages.yml tags=rbenv-packages
+- include: rbenv.yml tags=rbenv

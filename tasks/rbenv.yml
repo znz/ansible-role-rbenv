@@ -3,8 +3,9 @@
 - git: dest={{ rbenv_root }}/plugins/ruby-build repo=https://github.com/sstephenson/ruby-build depth=1
 - template: src=rbenv.sh.j2 dest=/etc/profile.d/rbenv.sh owner=root group=root mode=0644
 - name: rbenv install {{ rbenv_ruby_version }}
+  args:
+    creates: {{ rbenv_root }}/versions/{{ rbenv_ruby_version }}
   shell: |
-   creates={{ rbenv_root }}/versions/{{ rbenv_ruby_version }}
    set -e
    . /etc/profile.d/rbenv.sh
    export CONFIGURE_OPTS="--disable-install-doc"

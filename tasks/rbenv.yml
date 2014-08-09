@@ -6,10 +6,9 @@
   args:
     creates: "{{ rbenv_root }}/versions/{{ rbenv_ruby_version }}/bin/ruby"
   shell: |
-   set -e
-   . /etc/profile.d/rbenv.sh
-   export CONFIGURE_OPTS="--disable-install-doc"
-   rbenv install {{ rbenv_ruby_version }}
+   . /etc/profile.d/rbenv.sh &&
+   export CONFIGURE_OPTS="--disable-install-doc" &&
+   rbenv install {{ rbenv_ruby_version }} &&
    rbenv global {{ rbenv_ruby_version }}
 - file: state=directory path={{ rbenv_root }}/versions/{{ rbenv_ruby_version }}/etc owner=root group=root mode=0755
 - copy: src=gemrc dest={{ rbenv_root }}/versions/{{ rbenv_ruby_version }}/etc/gemrc owner=root group=root mode=0644

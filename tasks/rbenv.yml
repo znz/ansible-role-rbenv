@@ -4,7 +4,7 @@
 - template: src=rbenv.sh.j2 dest=/etc/profile.d/rbenv.sh owner=root group=root mode=0644
 - name: rbenv install {{ rbenv_ruby_version }}
   args:
-    creates: {{ rbenv_root }}/versions/{{ rbenv_ruby_version }}
+    creates: "{{ rbenv_root }}/versions/{{ rbenv_ruby_version }}/bin/ruby"
   shell: |
    set -e
    . /etc/profile.d/rbenv.sh

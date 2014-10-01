@@ -23,7 +23,8 @@ None.
     - hosts: all
       sudo: yes
       roles:
-      - znzj.rbenv
+      - role: znzj.rbenv
+        rbenv_ruby_version: 2.1.3
 
 ## License
 

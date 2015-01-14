@@ -1,2 +1,5 @@
 ---
 # defaults file for ansible-role-rbenv
+rbenv_gems:
+- rbenv-rehash
+- bundler

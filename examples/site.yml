@@ -3,4 +3,5 @@
   sudo: yes
   roles:
   - znzj.ja_jp
-  - znzj.rbenv
+  - role: znzj.rbenv
+    rbenv_ruby_version: 2.1.5

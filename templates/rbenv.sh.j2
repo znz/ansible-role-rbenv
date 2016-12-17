@@ -10,5 +10,5 @@ fi
 
 if [ -n "$RBENV_ROOT" ]; then
   export PATH="${RBENV_ROOT}/bin:$PATH"
-  eval "$(rbenv init -)"
+  eval "$(rbenv init - --no-rehash)"
 fi

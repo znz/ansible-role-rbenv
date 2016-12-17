@@ -1,2 +1,3 @@
 ---
-- apt: name={{ rbenv_packages | join(",") }}
+- name: "install rbenv related packages"
+  apt: name={{ rbenv_packages | join(",") }}

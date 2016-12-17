@@ -1,8 +1,22 @@
 ---
-- git: dest={{ rbenv_root }} repo=https://github.com/rbenv/rbenv depth=1
-- git: dest={{ rbenv_root }}/plugins/ruby-build repo=https://github.com/rbenv/ruby-build depth=1
-- template: src=rbenv.sh.j2 dest=/etc/profile.d/rbenv.sh owner=root group=root mode=0644
-- name: rbenv install {{ rbenv_ruby_version }}
+- name: "{{ rbenv_root }}"
+  git:
+    repo: https://github.com/rbenv/rbenv
+    dest: "{{ rbenv_root }}"
+    depth: 1
+- name: "{{ rbenv_root }}/plugins/ruby-build"
+  git:
+    repo: https://github.com/rbenv/ruby-build
+    dest: "{{ rbenv_root }}/plugins/ruby-build"
+    depth: 1
+- name: "/etc/profile.d/rbenv.sh"
+  template:
+    src: rbenv.sh.j2
+    dest: /etc/profile.d/rbenv.sh
+    owner: root
+    group: root
+    mode: 0644
+- name: "rbenv install {{ rbenv_ruby_version }}"
   args:
     creates: "{{ rbenv_root }}/versions/{{ rbenv_ruby_version }}/bin/ruby"
   shell: |
@@ -10,7 +24,22 @@
    export CONFIGURE_OPTS="--disable-install-doc" &&
    rbenv install {{ rbenv_ruby_version }} &&
    rbenv global {{ rbenv_ruby_version }}
-- file: state=directory path={{ rbenv_root }}/versions/{{ rbenv_ruby_version }}/etc owner=root group=root mode=0755
-- copy: src=gemrc dest={{ rbenv_root }}/versions/{{ rbenv_ruby_version }}/etc/gemrc owner=root group=root mode=0644
-- gem: name=rbenv-rehash user_install=no executable={{ rbenv_root }}/shims/gem
-- gem: name=bundler user_install=no executable={{ rbenv_root }}/shims/gem
+- name: "{{ rbenv_root }}/versions/{{ rbenv_ruby_version }}/etc"
+  file:
+    state: directory
+    path: "{{ rbenv_root }}/versions/{{ rbenv_ruby_version }}/etc"
+    owner: root
+    group: root
+    mode: 0755
+- name: "{{ rbenv_root }}/versions/{{ rbenv_ruby_version }}/etc/gemrc"
+  copy:
+    src: gemrc
+    dest: "{{ rbenv_root }}/versions/{{ rbenv_ruby_version }}/etc/gemrc"
+    owner: root
+    group: root
+    mode: 0644
+- name: "bundler gem"
+  gem:
+    name: bundler
+    user_install: no
+    executable: "{{ rbenv_root }}/shims/gem"

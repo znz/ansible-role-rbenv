@@ -1,16 +1,2 @@
 ---
 # vars file for ansible-role-rbenv
-
-rbenv_root: "/opt/rbenv"
-rbenv_ruby_version: "2.1.2"
-
-rbenv_packages:
-- git
-- autoconf
-- bison
-- build-essential
-- libffi-dev
-- libreadline6,libreadline6-dev
-- libssl-dev
-- libyaml-dev
-- zlib1g,zlib1g-dev

@@ -21,7 +21,7 @@ None.
 
     ---
     - hosts: all
-      sudo: yes
+      become: yes
       roles:
       - znzj.rbenv
 

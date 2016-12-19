@@ -16,3 +16,6 @@ rbenv_packages:
 - libssl-dev
 - libyaml-dev
 - zlib1g,zlib1g-dev
+
+rbenv_gems:
+- bundler

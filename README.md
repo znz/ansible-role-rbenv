@@ -24,7 +24,7 @@ None.
       become: yes
       roles:
       - role: znzj.rbenv
-        rbenv_ruby_version: 2.1.3
+        rbenv_ruby_version: 2.4.0
 
 ## License
 
